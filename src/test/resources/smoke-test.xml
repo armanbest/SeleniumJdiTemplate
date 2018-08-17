@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="smoke-test" verbose="1" >
+    <test name="AnnualPlans" >
+        <classes>
+            <class name="com.selenium.tests.PlanTest" />
+            <!-- <class name="com.selenium.tests.OtherTest" /> -->
+        </classes>
+    </test>
+    <test name="AnnualPlanItems" >
+        <classes>
+            <!-- <class name="com.selenium.tests.OtherTest" />
+            <class name="com.selenium.tests.OtherTest" /> -->
+        </classes>
+    </test>
+</suite>

@@ -1,0 +1,16 @@
+[
+  {
+    "bin": "123456789123",
+    "fullName": "Пупкин Иван Иванович",
+    "role": "customer1",
+    "group": "customer",
+    "desc": "заказчик"
+  },
+  {
+    "bin": "987654321987",
+    "fullName": "Иванов Петр Алексеевич",
+    "role": "customer2",
+    "group": "customer",
+    "desc": "заказчик"
+  }
+]
