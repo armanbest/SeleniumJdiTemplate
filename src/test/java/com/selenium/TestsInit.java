@@ -19,13 +19,10 @@ import java.io.*;
 import static br.eti.kinoshita.testlinkjavaapi.constants.ExecutionStatus.BLOCKED;
 import static br.eti.kinoshita.testlinkjavaapi.constants.ExecutionStatus.FAILED;
 import static br.eti.kinoshita.testlinkjavaapi.constants.ExecutionStatus.PASSED;
-import static java.lang.String.format;
 import static com.selenium.site.Site.testLinkHelper;
-import static com.epam.jdi.uitests.core.settings.JDISettings.logger;
 
 @Listeners(TestListener.class)
 public class TestsInit extends TestNGBase {
-    private TestCasesMap testCases = new TestCasesMap();
 
     @BeforeSuite(alwaysRun = true, description = "Init tests")
     public void setUp(ITestContext context) throws IOException {
@@ -63,9 +60,7 @@ public class TestsInit extends TestNGBase {
                 throw new RuntimeException("Invalid status");
         }
 
-        logger.info(format("Set test case '%s' status", testCases.get(result.getName())));
-
-        testLinkHelper.setStatus(testCases.get(result.getName()), status, notes);
+        testLinkHelper.setStatus(result.getTestClass().getName() + '#' + result.getMethod().getMethodName(), status, notes);
         if (! status.equals(PASSED)) {
             testLinkHelper.uploadAttachment(((TakesScreenshot) Settings.getDriver()).getScreenshotAs(OutputType.BASE64));
         }
