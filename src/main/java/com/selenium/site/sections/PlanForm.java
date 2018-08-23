@@ -4,6 +4,7 @@ import com.epam.jdi.uitests.web.selenium.elements.common.Button;
 import com.epam.jdi.uitests.web.selenium.elements.common.CheckBox;
 import com.epam.jdi.uitests.web.selenium.elements.common.DatePicker;
 import com.epam.jdi.uitests.web.selenium.elements.common.TextField;
+import com.epam.jdi.uitests.web.selenium.elements.composite.Alert;
 import com.epam.jdi.uitests.web.selenium.elements.composite.Form;
 import com.selenium.entities.Plan;
 import com.selenium.site.custom.UploadFileDialog;
@@ -49,12 +50,20 @@ public class PlanForm extends Form<Plan> {
     private Button back;
 
     private Function<? super WebDriver, Object> isFilesUploaded = (ExpectedCondition<Object>) webDriver -> {
-            assert webDriver != null;
-            boolean result = false;
-            try {
-                result = (boolean) ((JavascriptExecutor) webDriver).executeScript("return form_sign_helper.check_statuses()");
-            } catch (NullPointerException ex) {}
-            return result;
+        assert webDriver != null;
+
+        Alert alert = new Alert();
+        if (alert.isDisplayed()) {
+            String alertText = alert.getText();
+            alert.ok();
+            throw new UndefinedAlertException(alertText);
+        }
+
+        boolean result = false;
+        try {
+            result = (boolean) ((JavascriptExecutor) webDriver).executeScript("return form_sign_helper.check_statuses()");
+        } catch (NullPointerException ex) {}
+        return result;
     };
 
     @Override
